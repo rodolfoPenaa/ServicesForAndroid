@@ -12,6 +12,8 @@ import java.util.ResourceBundle.getBundle
 class MainActivity : AppCompatActivity(), Handler.Callback {
 
     lateinit var binding: ActivityMainBinding
+    var counterStrike: Int = 0
+
         override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -35,10 +37,10 @@ class MainActivity : AppCompatActivity(), Handler.Callback {
     }
 
     override fun handleMessage(msg: Message): Boolean {
+        //var c: Int = msg.data.getInt("Time State")
         Log.d("Activity", "handleMessage ${msg.data}")
-        //binding.textView.text = msg.data.getBundle("Estado de tiempo:", ).toString()
-        textView.setText(msg.data.getInt("Time State", 9).toString())
-        //textView.setText((contador++.toString()))
+        textView.text = "${(msg.data.getInt("Contador"))}"
         return true
     }
+
 }

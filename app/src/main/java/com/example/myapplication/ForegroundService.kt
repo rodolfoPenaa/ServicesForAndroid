@@ -16,7 +16,7 @@ class ForegroundService : Service() {
 
     private val mHandler: Handler? = Handler()
     private lateinit var mRunnable: Runnable
-    private var counter :Int = 0
+    private var counter: Int= 0
 
     companion object {
         var running = false
@@ -61,11 +61,15 @@ class ForegroundService : Service() {
     }
 
     /**
-     * Simula una tarea corriendo en segundo plano de forma indefinida hasta ser detenido explícitamente
+     * Simula una tarea corriendo en segundo plano de
+     * forma indefinida hasta ser detenido explícitamente
      */
+
+
     private fun runTask() {
-        val delayMillis = 1000 * 2L // X segundos
-        mRunnable = Runnable {
+        val delayMillis = 1000 * 7L // X segundos
+
+        mRunnable = Runnable { counter++
             notifyNextEvent()
             mHandler?.postDelayed(mRunnable, delayMillis)
         };
@@ -107,8 +111,8 @@ class ForegroundService : Service() {
     private fun notifyNextEvent() {
         // Ocurre un evento en el servicio y se hace alguna acción
         val message = handlerCallback.obtainMessage(1, "msg")
-        var contador = 0
-        message.data.putString("Time State", counter++.toString())
+        message.data.putString("Time State", "The count is $counter")
+        message.data.putInt("Contador", counter)
         message.sendToTarget()
     }
 
